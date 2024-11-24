@@ -19,6 +19,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { renderValue } from '@/lib/renderValue';
+import toast from 'react-hot-toast';
 
 const Files: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Files: React.FC = () => {
         }
       } catch (error) {
         console.error('Error fetching files:', error);
+        toast.error('Failed to fetch files');
       }
     };
 
@@ -62,8 +64,10 @@ const Files: React.FC = () => {
         dispatch(removeFile(fileToDelete._id));
         setIsDeleteDialogOpen(false);
         setFileToDelete(null);
+        toast.success('File deleted successfully');
       } catch (error) {
         console.error('Error deleting file:', error);
+        toast.error('Failed to delete file');
       }
     }
   };
